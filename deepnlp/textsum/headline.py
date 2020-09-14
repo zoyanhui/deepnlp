@@ -31,6 +31,7 @@ import seq2seq_model
 file_path = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(file_path, "news")
 train_dir = os.path.join(file_path, "ckpt")
+print("train_dir", train_dir)
 
 # We use a number of buckets and pad to the closest one for efficiency.
 # See seq2seq_model.Seq2SeqModel for details of how they work.
@@ -143,6 +144,7 @@ def create_model(session, forward_only):
   
   ckpt = tf.train.get_checkpoint_state(FLAGS.train_dir)
   if ckpt:
+    ckpt.model_checkpoint_path = train_dir # TODO, 
     model_checkpoint_path = ckpt.model_checkpoint_path
     print("Reading model parameters from %s" % model_checkpoint_path)
     saver = tf.train.Saver()
